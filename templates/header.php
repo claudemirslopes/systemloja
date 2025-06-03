@@ -17,6 +17,7 @@ $currentPage = basename($_SERVER['SCRIPT_NAME']);
     <link rel="stylesheet" href="/systemloja/assets/style/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="icon" type="image/png" href="/systemloja/assets/images/favicon.png">
     <style>
         .bg-gradient-primary {
             background-color: #333 !important;

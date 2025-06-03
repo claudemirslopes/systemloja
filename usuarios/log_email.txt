@@ -1,0 +1,28 @@
+SMTP Error: data not accepted.
+
+==== ENVIO ====
+Para: claudemir.slopes@hotmail.com
+Assunto: Recuperação de senha - System Loja
+Body: <p>Olá,</p><p>Recebemos uma solicitação para redefinir sua senha. Clique no link abaixo para criar uma nova senha:</p><p><a href="http://localhost/systemloja/usuarios/recuperar.php?token=23da13354c85356c2d2acd1b80c6afb332f251f58071c1cf150b7f7155a17613">Redefinir senha</a></p><p>Se não foi você, ignore este e-mail.</p>
+AltBody: Olá,Recebemos uma solicitação para redefinir sua senha. Clique no link abaixo para criar uma nova senha:Redefinir senhaSe não foi você, ignore este e-mail.
+
+[ERRO] SMTP Error: Could not authenticate.
+Exception: SMTP Error: Could not authenticate.
+
+==== ENVIO ====
+Para: claudemir.slopes@hotmail.com
+Assunto: Recuperação de senha - System Loja
+Body: <p>Olá,</p><p>Recebemos uma solicitação para redefinir sua senha. Clique no link abaixo para criar uma nova senha:</p><p><a href="http://localhost/systemloja/usuarios/recuperar.php?token=738c78b1f316f6f06924d5b8d9a3f1758d342d36605786ddede94e4d7a1fa258">Redefinir senha</a></p><p>Se não foi você, ignore este e-mail.</p>
+AltBody: Olá,Recebemos uma solicitação para redefinir sua senha. Clique no link abaixo para criar uma nova senha:Redefinir senhaSe não foi você, ignore este e-mail.
+
+[ERRO] SMTP Error: Could not authenticate.
+Exception: SMTP Error: Could not authenticate.
+
+==== ENVIO ====
+Para: claudemir.slopes@hotmail.com
+Assunto: Recuperação de senha - System Loja
+Body: <p>Olá,</p><p>Recebemos uma solicitação para redefinir sua senha. Clique no link abaixo para criar uma nova senha:</p><p><a href="http://localhost/systemloja/usuarios/recuperar.php?token=d9c4e6fa46f1b83d9dca49fa9317be64e0b7412f5a1243a06eacf8879fc2229d">Redefinir senha</a></p><p>Se não foi você, ignore este e-mail.</p>
+AltBody: Olá,Recebemos uma solicitação para redefinir sua senha. Clique no link abaixo para criar uma nova senha:Redefinir senhaSe não foi você, ignore este e-mail.
+
+[ERRO] SMTP Error: Could not authenticate.
+Exception: SMTP Error: Could not authenticate.
