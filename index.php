@@ -76,7 +76,7 @@ include __DIR__ . '/templates/header.php';
                     <div>
                         <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Top 3 Perfumes Mais Vendidos</div>
                     </div>
-                    <a href="/systemloja/vendas/relatorio.php" class="btn btn-sm btn-outline-warning ms-auto"><i class="fa fa-file-alt"></i> Relatório por data</a>
+                    <a href="/systemloja/vendas/relatorio.php" class="btn btn-sm btn-warning ms-auto"><i class="fa fa-file-alt"></i> Relatório por data</a>
                 </div>
                 <ol class="mb-0" style="font-size:1.1rem;">
                     <?php if (empty($topPerfumes)): ?>
@@ -98,7 +98,7 @@ include __DIR__ . '/templates/header.php';
                     <div>
                         <div class="text-xs font-weight-bold text-info text-uppercase mb-1">3 Últimas Vendas</div>
                     </div>
-                    <a href="/systemloja/vendas/list.php" class="btn btn-sm btn-outline-info ms-auto"><i class="fa fa-list"></i> Todas as Vendas</a>
+                    <a href="/systemloja/vendas/list.php" class="btn btn-sm btn-info ms-auto"><i class="fa fa-list"></i> Todas as Vendas</a>
                 </div>
                 <ol class="mb-0" style="font-size:1.1rem;">
                     <?php if (empty($ultimasVendas)): ?>

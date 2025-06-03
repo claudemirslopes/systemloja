@@ -21,27 +21,43 @@ $stmt = $pdo->prepare("INSERT INTO recuperacao_senha (usuario_id, token, expirad
 $stmt->execute([$usuario['id'], $token, $expira]);
 $link = 'http://' . $_SERVER['HTTP_HOST'] . '/systemloja/usuarios/recuperar.php?token=' . $token;
 
+// Função para carregar variáveis do .env
+function env($key, $default = null) {
+    static $env = null;
+    if ($env === null) {
+        $env = [];
+        $envPath = __DIR__ . '/../.env';
+        if (file_exists($envPath)) {
+            foreach (file($envPath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line) {
+                if (strpos(trim($line), '#') === 0) continue;
+                [$k, $v] = array_map('trim', explode('=', $line, 2) + [1 => '']);
+                $env[$k] = $v;
+            }
+        }
+    }
+    return $env[$key] ?? $default;
+}
+
 // Função para enviar e-mail via SMTP (MailerSend)
 function enviarEmailSMTP($to, $subject, $bodyHtml, $bodyText = '') {
     require_once __DIR__ . '/../vendor/autoload.php';
     $mail = new \PHPMailer\PHPMailer\PHPMailer(true);
     try {
         $mail->isSMTP();
-        // CONFIGURE AQUI OS DADOS DO SEU PROVEDOR DE E-MAIL
-        $mail->Host = 'smtp.titan.email';
+        $mail->Host = env('MAIL_HOST');
         $mail->SMTPAuth = true;
-        $mail->Username = 'no-reply@rogerimports.com.br';
-        $mail->Password = 'Eliane19@1';
-        $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS; // SSL
-        $mail->Port = 465; // Porta SSL
-        $mail->setFrom('no-reply@rogerimports.com.br', 'Roger Imports');
+        $mail->Username = env('MAIL_USERNAME');
+        $mail->Password = env('MAIL_PASSWORD');
+        $mail->SMTPSecure = strtolower(env('MAIL_ENCRYPTION', 'ssl')) === 'ssl' ? PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS : PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = (int)env('MAIL_PORT', 465);
+        $mail->setFrom(env('MAIL_FROM'), env('MAIL_FROM_NAME', 'System Loja'));
         $mail->addAddress($to);
         $mail->isHTML(true);
         $mail->Subject = $subject;
         $mail->Body = $bodyHtml;
         $mail->AltBody = $bodyText ?: strip_tags($bodyHtml);
         $mail->CharSet = 'UTF-8';
-        $mail->SMTPDebug = 0; // Desative para AJAX funcionar corretamente
+        $mail->SMTPDebug = 0;
         $log = "\n==== ENVIO ====\nPara: $to\nAssunto: $subject\nBody: $bodyHtml\nAltBody: $mail->AltBody\n";
         file_put_contents(__DIR__.'/log_email.txt', $log, FILE_APPEND);
         $mail->send();

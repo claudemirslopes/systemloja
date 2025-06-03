@@ -78,6 +78,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $erro = 'Preencha todos os campos obrigatórios!';
     }
+} else {
+    $data_venda = date('Y-m-d');
 }
 
 function moedaParaFloat($valor)
@@ -118,8 +120,8 @@ include __DIR__ . '/../templates/header.php';
             </select>
         </div>
         <div class="form-group col-md-4">
-            <label for="data_venda">Data da Venda</label>
-            <input type="date" name="data_venda" id="data_venda" class="form-control" required>
+            <label>Data da Venda</label>
+            <input type="date" name="data_venda" class="form-control" value="<?= htmlspecialchars($data_venda) ?>" required>
         </div>
     </div>
     <hr>

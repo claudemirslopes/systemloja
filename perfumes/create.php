@@ -8,7 +8,13 @@ function moedaParaFloat($valor) {
     return number_format((float)$valor, 2, '.', ''); // Garante 2 casas decimais
 }
 
-$titulo = $valor_compra = $quantidade = $data_entrada = '';
+$titulo = $valor_compra = $quantidade = '';
+// Preenche data_entrada com a data atual se não for POST
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $data_entrada = $_POST['data_entrada'] ?? '';
+} else {
+    $data_entrada = date('Y-m-d');
+}
 $erro = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
