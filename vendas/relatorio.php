@@ -85,7 +85,7 @@ include __DIR__ . '/../templates/header.php';
         <div class="card shadow h-100 py-2 border-left-success" style="border-left: 0.25rem solid #22c55e !important;">
             <div class="card-body d-flex align-items-center">
                 <div class="mr-3">
-                    <i class="fa fa-money fa-2x text-success"></i>
+                    <i class="fa fa-dollar fa-2x text-success"></i>
                 </div>
                 <div>
                     <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Lucro Total</div>
@@ -109,41 +109,60 @@ include __DIR__ . '/../templates/header.php';
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($vendas as $v): ?>
-        <tr>
-            <td class="col-id text-center"><?= $v['id'] ?></td>
-            <td><?= date('d/m/Y', strtotime($v['data_venda'])) ?></td>
-            <td><?= htmlspecialchars($v['cliente']) ?></td>
-            <td><?= htmlspecialchars($v['forma_pagamento']) ?></td>
-            <td class="text-center">
-                <?php
-                $stmtItens = $pdo->prepare("SELECT i.*, p.titulo FROM itens_venda i JOIN perfumes p ON i.perfume_id = p.id WHERE i.venda_id = ?");
-                $stmtItens->execute([$v['id']]);
-                $itens = $stmtItens->fetchAll();
-                foreach ($itens as $item) {
-                    echo htmlspecialchars($item['titulo']) . ' (Qtd: ' . $item['quantidade'] . ')<br>';
-                }
-                ?>
-            </td>
-            <td class="text-center">R$ <?= number_format($v['valor_venda'],2,',','.') ?></td>
-            <td class="text-center">R$ <?= number_format($v['valor_compra'],2,',','.') ?></td>
-            <td class="text-center">R$ <?= number_format($v['valor_lucro'],2,',','.') ?></td>
-        </tr>
-        <?php endforeach; ?>
-        <?php if (empty($vendas)): ?>
-        <tr><td colspan="8" class="text-center">Nenhuma venda encontrada para o período.</td></tr>
+        <?php if (!empty($vendas)): ?>
+            <?php foreach ($vendas as $v): ?>
+            <tr>
+                <td class="col-id text-center"><?= $v['id'] ?></td>
+                <td><?= date('d/m/Y', strtotime($v['data_venda'])) ?></td>
+                <td><?= htmlspecialchars($v['cliente']) ?></td>
+                <td><?= htmlspecialchars($v['forma_pagamento']) ?></td>
+                <td class="text-center">
+                    <?php
+                    $stmtItens = $pdo->prepare("SELECT i.*, p.titulo FROM itens_venda i JOIN perfumes p ON i.perfume_id = p.id WHERE i.venda_id = ?");
+                    $stmtItens->execute([$v['id']]);
+                    $itens = $stmtItens->fetchAll();
+                    foreach ($itens as $item) {
+                        echo htmlspecialchars($item['titulo']) . ' (Qtd: ' . $item['quantidade'] . ')<br>';
+                    }
+                    ?>
+                </td>
+                <td class="text-center">R$ <?= number_format($v['valor_venda'],2,',','.') ?></td>
+                <td class="text-center">R$ <?= number_format($v['valor_compra'],2,',','.') ?></td>
+                <td class="text-center">R$ <?= number_format($v['valor_lucro'],2,',','.') ?></td>
+            </tr>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <!-- DataTables exige pelo menos uma linha com o número exato de <td> -->
+            <tr>
+                <td class="col-id text-center">-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td class="text-center">-</td>
+                <td class="text-center">-</td>
+                <td class="text-center">Nenhuma venda encontrada para o período.</td>
+            </tr>
         <?php endif; ?>
     </tbody>
 </table>
+<!-- Corrige bug do DataTables ao não encontrar registros -->
 <script>
-// Garante que o DataTable seja inicializado corretamente
 $(document).ready(function() {
-    $('#relatorioVendas').DataTable({
+    var table = $('#relatorioVendas').DataTable({
         language: {
             url: '//cdn.datatables.net/plug-ins/1.13.8/i18n/pt-BR.json'
         },
         responsive: true,
         autoWidth: false
+    });
+    // Corrige erro de coluna ao não encontrar registros
+    table.on('error.dt', function(e, settings, techNote, message) {
+        if (techNote === 18) {
+            // Remove todas as linhas e adiciona a linha de colspan manualmente
+            var colCount = $('#relatorioVendas thead th').length;
+            $('#relatorioVendas tbody').html('<tr><td colspan="'+colCount+'" class="text-center">Nenhuma venda encontrada para o período.</td></tr>');
+        }
     });
 });
 </script>

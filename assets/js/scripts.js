@@ -15,12 +15,12 @@ document.addEventListener('DOMContentLoaded', function() {
                         },
                         {
                             extend: 'excel',
-                            text: '<i class="fa fa-file-excel-o"></i> Excel',
+                            text: '<i class="fa fa-file-excel"></i> Excel',
                             className: 'buttons-excel'
                         },
                         {
                             extend: 'pdf',
-                            text: '<i class="fa fa-file-pdf-o"></i> PDF',
+                            text: '<i class="fa fa-file-pdf"></i> PDF',
                             className: 'buttons-pdf'
                         },
                         {

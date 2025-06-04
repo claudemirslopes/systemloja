@@ -57,7 +57,7 @@ include __DIR__ . '/templates/header.php';
         <div class="card shadow h-100 py-2 border-left-success" style="border-left: 0.25rem solid #22c55e !important;">
             <div class="card-body d-flex align-items-center">
                 <div class="mr-3">
-                    <i class="fa fa-money fa-2x text-success"></i>
+                    <i class="fa fa-dollar fa-2x text-success"></i>
                 </div>
                 <div>
                     <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Lucro Total</div>
@@ -67,9 +67,26 @@ include __DIR__ . '/templates/header.php';
         </div>
     </div>
 </div>
+<style>
+    .gold .bg-warning {
+        background: linear-gradient(135deg, #9f7108, #C99D24);
+        border: none;
+    }
+    .gold .text-warning {
+        color: #9f7108 !important;
+    }
+    .gold .btn-warning {
+        background: linear-gradient(135deg, #9f7108, #C99D24);
+        border: none;
+    }
+    .gold .btn-warning:hover {
+        background: linear-gradient(135deg, #C99D24, #9f7108);
+        border: none;
+    }
+</style>
 <div class="row mb-4">
-    <div class="col-md-6">
-        <div class="card shadow h-100 py-2 border-left-warning" style="border-left: 0.25rem solid #f59e42 !important;">
+    <div class="col-md-6 gold">
+        <div class="card shadow h-100 py-2 border-left-warning" style="border-left: 0.25rem solid #9f7108 !important;">
             <div class="card-body">
                 <div class="d-flex align-items-center mb-2">
                     <i class="fa fa-star fa-2x text-warning me-3"></i>
